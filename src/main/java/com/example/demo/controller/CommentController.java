@@ -5,6 +5,8 @@ import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,18 +40,18 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CommentDto create(@RequestBody CommentDto commentDto) {
-        return commentService.save(commentDto);
+    public CommentDto create(@RequestBody CommentDto commentDto, @AuthenticationPrincipal UserDetails userDetails) {
+        return commentService.save(commentDto, userDetails.getUsername());
     }
 
     @PutMapping
-    public CommentDto update(@RequestBody CommentDto commentDto) {
-        return commentService.update(commentDto);
+    public CommentDto update(@RequestBody CommentDto commentDto, @AuthenticationPrincipal UserDetails userDetails) {
+        return commentService.update(commentDto, userDetails.getUsername());
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        commentService.delete(id);
+    public void delete(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
+        commentService.delete(id, userDetails.getUsername());
     }
 }

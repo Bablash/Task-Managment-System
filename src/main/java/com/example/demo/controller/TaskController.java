@@ -6,6 +6,8 @@ import com.example.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,29 +48,31 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TaskDto create(@RequestBody TaskDto task) {
-         return taskService.save(task);
+    public TaskDto create(@RequestBody TaskDto task, @AuthenticationPrincipal UserDetails userDetails) {
+         return taskService.save(task, userDetails.getUsername());
     }
 
     @PutMapping
-    public TaskDto update(@RequestBody TaskDto task) {
-        return taskService.update(task);
+    public TaskDto update(@RequestBody TaskDto task, @AuthenticationPrincipal UserDetails userDetails) {
+        return taskService.update(task, userDetails.getUsername());
     }
 
     @PatchMapping("/{id}/status")
-    public TaskDto changeStatus(@PathVariable Long id, @RequestParam Status status) {
-        return taskService.updateStatusTask(id, status);
+    public TaskDto changeStatus(@PathVariable Long id, @RequestParam Status status,
+                                @AuthenticationPrincipal UserDetails userDetails) {
+        return taskService.updateStatusTask(id, status, userDetails.getUsername());
     }
 
     @PatchMapping("/{id}/executor")
-    public TaskDto changeExecutor(@PathVariable Long id, @RequestParam Long executorId) {
-        return taskService.updateExecutorTask(id, executorId);
+    public TaskDto changeExecutor(@PathVariable Long id, @RequestParam Long executorId,
+                                  @AuthenticationPrincipal UserDetails userDetails) {
+        return taskService.updateExecutorTask(id, executorId, userDetails.getUsername());
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
-        taskService.delete(id);
+    public void delete(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
+        taskService.delete(id, userDetails.getUsername());
     }
 
 }
