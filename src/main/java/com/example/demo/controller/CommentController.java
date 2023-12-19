@@ -44,10 +44,10 @@ public class CommentController {
             summary = "Получить комментарии к задаче по id задачи"
     )
     @GetMapping("/task/{id}")
-    public List<CommentDto> getByTaskId(@PathVariable Long taskId,
+    public List<CommentDto> getByTaskId(@PathVariable Long id,
                                                 @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "5") int limit) {
-        return commentService.getComments(taskId, PageRequest.of(page, limit));
+        return commentService.getComments(id, PageRequest.of(page, limit));
     }
 
     @Operation(

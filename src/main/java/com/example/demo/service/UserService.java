@@ -33,6 +33,10 @@ public class UserService {
 
     }
 
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
     public void delete(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if(userOptional.isPresent()) {

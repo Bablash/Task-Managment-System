@@ -46,7 +46,7 @@ public class TaskService {
             optionalTask.get().setDescription(taskDto.getDescription());
             optionalTask.get().setStatus(taskDto.getStatus());
             optionalTask.get().setPriority(taskDto.getPriority());
-            optionalTask.get().setAuthor(getAuthor(taskDto.getAuthorId()));
+            optionalTask.get().setAuthor(getUserByUsername(authorName));
             optionalTask.get().setExecutor(getExecutor(taskDto.getExecutorId()));
             return get(taskRepository.save(optionalTask.get()).getId());
 
