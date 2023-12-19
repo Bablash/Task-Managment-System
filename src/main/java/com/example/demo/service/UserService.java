@@ -31,15 +31,4 @@ public class UserService {
 
     }
 
-    public User get(Long id) {
-        return userRepository.findById(id).orElseThrow();
-    }
-
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }
-
-    public void delete(Long id) {
-        userRepository.deleteById(id);
-    }
 }

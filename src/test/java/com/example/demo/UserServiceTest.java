@@ -29,7 +29,7 @@ public class UserServiceTest {
 
     @Test
     void passwordAlwaysShouldBeEncoded() {
-        userService.save(new User(4l, "user4@gmail.com", "user4"));
+        userService.save(new User(4L, "user4@gmail.com", "user4"));
         Mockito.verify(passwordEncoderMock, Mockito.times(1)).encode("user4");
     }
 

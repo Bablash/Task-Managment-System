@@ -28,9 +28,9 @@ class TaskControllerTest {
     @Test
     void getAll_ReturnsValidResponseEntity() {
 
-        TaskDto task1 = new TaskDto(1l, "task by user with id = 1", Status.IN_PROGRESS, Priority.MEDIUM, 1l, 1l);
-        TaskDto task2 = new TaskDto(2l, "task by user with id = 2", Status.IN_PROGRESS, Priority.MEDIUM, 2l, 2l);
-        TaskDto task3 = new TaskDto(3l, "task by user with id = 3", Status.IN_PROGRESS, Priority.MEDIUM, 3l, 3l);
+        TaskDto task1 = new TaskDto(1L, "task by user with id = 1", Status.IN_PROGRESS, Priority.MEDIUM, 1L, 1L);
+        TaskDto task2 = new TaskDto(2L, "task by user with id = 2", Status.IN_PROGRESS, Priority.MEDIUM, 2L, 2L);
+        TaskDto task3 = new TaskDto(3L, "task by user with id = 3", Status.IN_PROGRESS, Priority.MEDIUM, 3L, 3L);
 
         List<TaskDto> tasks = List.of(task1, task2, task3);
 

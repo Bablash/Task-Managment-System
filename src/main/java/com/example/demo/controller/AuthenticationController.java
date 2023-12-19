@@ -4,6 +4,8 @@ import com.example.demo.config.AuthenticationRequest;
 import com.example.demo.config.AuthenticationResponse;
 import com.example.demo.service.JwtTokenService;
 import com.example.demo.service.JwtUserDetailsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+
 @RestController
+@Tag(name = "Аутентификация")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -31,6 +35,10 @@ public class AuthenticationController {
         this.jwtTokenService = jwtTokenService;
     }
 
+    @Operation(
+            summary = "Аутентификация",
+            description = "Позволяет аутентифицировать пользователя и получить токен"
+    )
     @PostMapping("/authenticate")
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
         try {

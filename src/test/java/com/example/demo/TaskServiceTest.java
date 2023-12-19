@@ -28,9 +28,9 @@ class TaskServiceTest {
     TaskService taskService;
 
     @Test
-     void findAllWasCalled() {
-        User user1 = new User(1l, "user1@gmail.com", "user1");
-        Task task1 = new Task(1l, "task by user with id = 1", Status.IN_PROGRESS, Priority.MEDIUM, user1, user1, null);
+    void findAllWasCalled() {
+        User user1 = new User(1L, "user1@gmail.com", "user1");
+        Task task1 = new Task(1L, "task by user with id = 1", Status.IN_PROGRESS, Priority.MEDIUM, user1, user1, null);
 
         doReturn(List.of(task1)).when(this.taskRepositoryMock).findAll();
         taskService.getAll();
