@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,4 +33,11 @@ public class UserService {
 
     }
 
+    public void delete(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isPresent()) {
+            userRepository.delete(userOptional.get());
+        } else throw new NoSuchElementException("Entity with id = " + id + " not found");
+
+    }
 }

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  tasks:
+    container_name: tasks
+    build:
+      context: /
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: "postgres/postgres"
+    networks:
+      - network
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    container_name: postgres
+    image: postgres:15.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
+      PGUSER: "postgres"
+    expose:
+      - 5432
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "postgres"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 80s
+
+networks:
+  network:
+    name: network
+volumes:
+  postgres_data:
