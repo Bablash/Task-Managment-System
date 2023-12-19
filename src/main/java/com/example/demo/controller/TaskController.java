@@ -32,18 +32,18 @@ public class TaskController {
         return taskService.get(id);
     }
 
-    @GetMapping("/author/{authorId}")
-    public List<TaskDto> getTasksByAuthor(@PathVariable Long authorId,
+    @GetMapping("/author")
+    public List<TaskDto> getTasksByAuthor(@RequestParam Long id,
                                           @RequestParam(defaultValue = "0") int page,
                                           @RequestParam(defaultValue = "5") int limit) {
-        return taskService.getTasksByAuthor(authorId, PageRequest.of(page, limit));
+        return taskService.getTasksByAuthor(id, PageRequest.of(page, limit));
     }
 
-    @GetMapping("/executor/{executorId}")
-    public List<TaskDto> getTasksByExecutor(@PathVariable Long executorId,
+    @GetMapping("/executor")
+    public List<TaskDto> getTasksByExecutor(@RequestParam Long id,
                                             @RequestParam(defaultValue = "0") int page,
                                             @RequestParam(defaultValue = "5") int limit) {
-        return taskService.getTasksByExecutor(executorId, PageRequest.of(page, limit));
+        return taskService.getTasksByExecutor(id, PageRequest.of(page, limit));
     }
 
     @PostMapping

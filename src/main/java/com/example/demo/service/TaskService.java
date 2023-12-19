@@ -91,11 +91,11 @@ public class TaskService {
         return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException(authorExceptionMessage));
     }
 
-    public User getUserByUsername(String email) {
+    private User getUserByUsername(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public User getExecutor(Long id) {
+    private User getExecutor(Long id) {
         if (id == null) {
             return null;
         } else {
@@ -146,7 +146,7 @@ public class TaskService {
         }
     }
 
-    public TaskDto newTaskDto(Task task) {
+    private TaskDto newTaskDto(Task task) {
         if (task.getExecutor() == null) {
             return new TaskDto(task.getId(), task.getDescription(), task.getStatus(),
                     task.getPriority(), task.getAuthor().getId());

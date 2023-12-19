@@ -35,6 +35,6 @@ public class Task {
     @JoinColumn(name = "executor_id", referencedColumnName = "id")
     private User executor;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 }
